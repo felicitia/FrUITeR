@@ -1,19 +1,16 @@
 <!--ts-->
-      * [FrUITeR's Introduction](#fruiters-introduction)
-      * [Artifact Dolownload](#artifact-dolownload)
-      * [FrUITeR's Components and Baseline](#fruiters-components-and-baseline)
-         * [Components](#components)
-         * [Baseline](#baseline)
-      * [Modularization of Existing Techniques](#modularization-of-existing-techniques)
-         * [Extracted GUI Mappers](#extracted-gui-mappers)
-         * [Unified GUI Maps and Transferred Tests](#unified-gui-maps-and-transferred-tests)
-      * [FrUITeR's Benchmark](#fruiters-benchmark)
-      * [FrUITeR's Final Datasets](#fruiters-final-datasets)
-         * [Header Description](#header-description)
-      * [FrUITeR's Data Analyses](#fruiters-data-analyses)
-
-<!-- Added by: yixue, at: Mon May 25 16:34:33 CDT 2020 -->
-
+  * [FrUITeR's Introduction](#fruiters-introduction)
+  * [Artifact Dolownload](#artifact-dolownload)
+  * [FrUITeR's Components and Baseline](#fruiters-components-and-baseline)
+     * [Components](#components)
+     * [Baseline](#baseline)
+  * [Modularization of Existing Techniques](#modularization-of-existing-techniques)
+     * [Extracted GUI Mappers](#extracted-gui-mappers)
+     * [Unified GUI Maps and Transferred Tests](#unified-gui-maps-and-transferred-tests)
+  * [FrUITeR's Benchmark](#fruiters-benchmark)
+  * [FrUITeR's Final Datasets](#fruiters-final-datasets)
+     * [Header Description](#header-description)
+  * [FrUITeR's Data Analyses](#fruiters-data-analyses)
 <!--te-->
 
 ## FrUITeR's Introduction
