@@ -13,9 +13,9 @@
   * [FrUITeR's Data Analyses](#fruiters-data-analyses)
 <!--te-->
 
-## FrUITeR's Introduction
+# FrUITeR's Introduction
 
-**Paper Abstract:** UI testing is tedious and time-consuming due to the manual effort required. Recent research has explored opportunities for reusing existing UI tests for an app to automatically generate new tests for other apps. However, the evaluation of such techniques currently remains manual, unscalable, and unreproducible, which can waste effort and impede progress in this emerging area. We introduce FrUITeR, a framework that automatically evaluates UI test reuse in a reproducible way. We apply FrUITeR to existing test-reuse tech- niques on a uniform benchmark we established, resulting in 11,917 test reuse cases from 20 apps. We report several key findings aimed at improving UI test reuse that are missed by existing work.
+**Paper Abstract:** UI testing is tedious and time-consuming due to the manual effort required. Recent research has explored opportunities for reusing existing UI tests for an app to automatically generate new tests for other apps. However, the evaluation of such techniques currently remains manual, unscalable, and unreproducible, which can waste effort and impede progress in this emerging area. We introduce FrUITeR, a framework that automatically evaluates UI test reuse in a reproducible way. We apply FrUITeR to existing test-reuse techniques on a uniform benchmark we established, resulting in 11,917 test reuse cases from 20 apps. We report several key findings aimed at improving UI test reuse that are missed by existing work.
 
 
 **FrUITeR's Workflow:** As shown in the figure below, FrUITeR takes inputs from Existing Tests and Existing Techniques (left), and outputs the evaluation Results of a given existing technique in the end (right). 
@@ -38,41 +38,58 @@
 
 **Utility Evaluator:** FrUITeR's component that evaluates the *usefulness* of test cases transferred by a given technique compared to the ground-truth test cases, based on FrUITeR's 2 utility metrics: (1) effort; and (2) reduction.
 
-## Artifact Dolownload
+# Installation
+1. Download and install **Docker Desktop** from this link ([https://www.docker.com/get-started](https://www.docker.com/get-started))
 
-FrUITeR's artifacts consist of eight different repositories as follows. Their descriptions can be found in the rest of this website.
+2. Start your docker application and open the terminal. Test that your installation works by running the hello-world Docker image using command `$ docker run hello-world`. If you see the message below, Docker is successfully installed!
+```
+Unable to find image 'hello-world:latest' locally
+    latest: Pulling from library/hello-world
+    ca4f61b1923c: Pull complete
+    Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
+    Status: Downloaded newer image for hello-world:latest
 
-**Repo #1.** [EventExtractor.zip](repos/EventExtractor.zip)
+    Hello from Docker!
+    This message shows that your installation appears to be working correctly.
+    ...
+```
 
-**Repo #2.** [TestAnalyzer.zip](repos/TestAnalyzer.zip)
+3. Believe it or not, that's it! You're done with all the installation! :)
 
-**Repo #3.** [AppFlowGUIMapper.zip](repos/AppFlowGUIMapper.zip)
+# Quick Start
 
-**Repo #4.** [ATMGUIMapper.zip](repos/ATMGUIMapper.zip)
+FrUITeR has three components (shaded boxes in the workflow): (1) **Event Extractor**; (2) **Fidelity Evaluator**; and (3) **Utility Evaluator**. We will now run each of them with a simple example.
 
-**Repo #5.** [GTMGUIMapper.zip](repos/GTMGUIMapper.zip)
+## How to Run Event Extractor
 
-**Repo #6.** [GUIMaps.zip](repos/GUIMaps.zip)
+Event Extractor is implemented in Java using [Soot framework](https://github.com/Sable/soot). The source code is located on Github: https://github.com/felicitia/EventExtractor. We have created a Docker image with all the dependencies. Simply follow the steps below to run Event Extractor.
 
-**Repo #7.** [TestBenchmark.zip](https://drive.google.com/file/d/1rCxkBW4-Hl1cBS3BenjbXqLIVSGkK4Dl/view?usp=sharing)
+**What to Expect:** Let's use the app *Wish* as an example. Event Extractor will extract the GUI event sequences from Wish's test cases written in Java to `Wish.csv`. We assume the test cases are already written. For example, Wish's test cases are located on our Github reposotiry: [Wish's test cases](https://github.com/felicitia/TestBenchmark-Jave-client/blob/master/src/main/java/Wish/RepresentativeTests.java).
 
-**Repo #8.** [DataAnalysis.zip](repos/DataAnalysis.zip)
+#### Steps:
 
+1. The Docker image of the Event Extractor is located on Docker Hub ([repo link](https://hub.docker.com/r/felicitia/fruiter-eventextractor)). In your favorite terminal, simply run the CMD below to download the image to your local machine. (Make sure your Docker Desktop application is running.)
 
-## FrUITeR's Components and Baseline
+    CMD: `$ docker pull felicitia/fruiter-eventextractor`
 
-FrUITeR has three components (shaded boxes in the workflow), and two baseline techniques Naïve and Perfect.
+2. We recommend creating a clean new directory for the output files produced by Event Extractor so that you can find them easily. For example, create a 'shared_volume' folder using the CMD below.
 
-### Components
+    CMD: `$ mkdir shared_volume`
 
-**Event Extractor** is
-implemented in Java using [Soot framework](https://github.com/Sable/soot) (235 SLOC).
+3. Run Event Extractor to convert Wish's test cases into `Wish.csv` using the CMD below. `{absolute path}` is the absolute path to the directory that contains the 'shared_volume' folder you just created in step 2. If you want to know more about the parameters, check out this [reference](https://thenewstack.io/docker-basics-how-to-share-data-between-a-docker-container-and-host/).
 
-`Location:` Repo #1 `EventExtractor/src/`
+    CMD: `$ docker run -dit -P -v {absolute path}/shared_volume:/output/ felicitia/fruiter-eventextractor Wish.RepresentativeTests classes/ /output/`
 
-**Fidelity Evaluator** and **Utility Evaluator** are implemented in Python (1,045 SLOC). 
+4. You should see `Wish.csv` in the 'shared_volume' folder you created in step 2. You can compare yours with our example [Wish.csv](https://github.com/felicitia/EventExtractor/blob/master/example_output/Wish.csv) to make sure it's correct.
+
+## How to Run Fidelity Evaluator and Utility Evaluator
+
+**Fidelity Evaluator** and **Utility Evaluator** are implemented in Python. 
 
 `Location:` Repo #2 `TestAnalyzer/gui_mapper/result_generator.ipynb`; `TestAnalyzer/gui_mapper/process_final_results.ipynb`
+
+
+# Fully Reproduce
 
 ### Baseline
 
