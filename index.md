@@ -39,7 +39,7 @@
 **Utility Evaluator:** FrUITeR's component that evaluates the *usefulness* of test cases transferred by a given technique compared to the ground-truth test cases, based on FrUITeR's 2 utility metrics: (1) effort; and (2) reduction.
 
 # Installation
-1. Download and install **Docker Desktop** from this link ([https://www.docker.com/get-started](https://www.docker.com/get-started))
+1. Download and install **Docker Desktop** from this link ([https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop))
 
 2. Start your docker application and open the terminal. Test that your installation works by running the hello-world Docker image using command `$ docker run hello-world`. If you see the message below, Docker is successfully installed!
 ```
@@ -54,7 +54,7 @@ Unable to find image 'hello-world:latest' locally
     ...
 ```
 
-3. Believe it or not, that's it! You're done with all the installation! :)
+3. That's it! You're done with all the installation and ready to go! :)
 
 # Quick Start
 
@@ -66,7 +66,7 @@ Event Extractor is implemented in Java using [Soot framework](https://github.com
 
 **What to Expect:** Let's use the app *Wish* as an example. Event Extractor will extract the GUI event sequences from Wish's test cases written in Java to `Wish.csv`. We assume the test cases are already written. For example, Wish's test cases are located on our Github reposotiry: [Wish's test cases](https://github.com/felicitia/TestBenchmark-Jave-client/blob/master/src/main/java/Wish/RepresentativeTests.java).
 
-#### Steps:
+### Steps:
 
 1. The Docker image of the Event Extractor is located on Docker Hub ([repo link](https://hub.docker.com/r/felicitia/fruiter-eventextractor)). In your favorite terminal, simply run the CMD below to download the image to your local machine. (Make sure your Docker Desktop application is running.)
 
@@ -84,16 +84,54 @@ Event Extractor is implemented in Java using [Soot framework](https://github.com
 
 ## How to Run Fidelity Evaluator and Utility Evaluator
 
-**Fidelity Evaluator** and **Utility Evaluator** are implemented in Python. 
+**Fidelity Evaluator** and **Utility Evaluator** are implemented in Python using [Jupyter Notebook](https://jupyter.org/). The source code is located on Github within TestAnalyzer project: https://github.com/felicitia/TestAnalyzer. We envision Fidelity Evaluator and Utility Evaluator are two instances of TestAnalyzer's Evaluators based on the fidelity and utility metrics we defined. In the future, TestAnalyzer can be extended to include other Evaluators based on the metrics of one's interest (defined by us or other follow-up work).
 
-`Location:` Repo #2 `TestAnalyzer/gui_mapper/result_generator.ipynb`; `TestAnalyzer/gui_mapper/process_final_results.ipynb`
+We have created a Docker image with all the dependencies for you to launch Jupyter Notebook. Simply follow the steps below to run Fidelity Evaluator and Utility Evaluator.
 
+**What to Expect:** Let's reproduce CraftDroid's 12 cases as an example (the 12 cases are described in Section 5.3.2 Final Datasets). Both Fidelity Evaluator and Utility Evaluator will output the final results based on 7 fedelity metrics and 2 utility metrics as `.csv` files, based on the necessary inputs indicated in the workflow diagram.
+
+### Steps:
+
+1. The Docker image of the TestAnalyzer (that contains Fidelity Evaluator and Utility Evaluator) is located on Docker Hub ([repo link](https://hub.docker.com/r/felicitia/fruiter-testanalyzer)). In your favorite terminal, simply run the CMD below to download the image to your local machine. (Make sure your Docker Desktop application is running.)
+
+    CMD: `$ docker pull felicitia/fruiter-testanalyzer`
+
+2. Run TestAnalyzer to launch the Jupyter Notebook server using the CMD below.
+
+    CMD: `docker run -p 8888:8888 felicitia/fruiter-testanalyzer`
+
+    You should see the following messages.
+```
+[I 02:44:42.811 NotebookApp] Writing notebook server cookie secret to /root/.local/share/jupyter/runtime/notebook_cookie_secret
+[I 02:44:43.154 NotebookApp] Serving notebooks from local directory: /src
+[I 02:44:43.154 NotebookApp] The Jupyter Notebook is running at:
+[I 02:44:43.154 NotebookApp] http://b2ff46ae4b61:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee
+[I 02:44:43.154 NotebookApp]  or http://127.0.0.1:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee
+[I 02:44:43.154 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 02:44:43.158 NotebookApp]
+
+    To access the notebook, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/nbserver-6-open.html
+    Or copy and paste one of these URLs:
+        http://b2ff46ae4b61:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee
+     or http://127.0.0.1:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee
+```
+
+3. Copy the URL in the last line shown in step 2. In our example output above, it is `http://127.0.0.1:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee`. Open the URL in a broswer. You should see a similar screen as below.
+
+<img src="figs/jupyter.png" >  
+
+4. Go to `fidelity_evaluator_example.ipynb` and run it by clicking the 'Run' button as shown below. It will output `craftdroid_fidelity.csv` in the `output/` folder located in the home page (as indicated in the screenshot above). The output files can be downloaded to your local machine (download option is under the 'File' menu). You can compare your output with our example [craftdroid_fidelity.csv](https://github.com/felicitia/TestAnalyzer/blob/master/output/craftdroid_fidelity.csv) to make sure it's correct. The fidelity metrics are shown in the right-most columns.
+
+<img src="figs/jupyter_run.png" >  
+
+5. Similar to step 4, go to `utility_evaluator_example.ipynb` and run it by clicking the 'Run' button. It will output `craftdroid_utility.csv` in the `output/` folder located in the home page. You can compare your output with our example [craftdroid_utility.csv](https://github.com/felicitia/TestAnalyzer/blob/master/output/craftdroid_utility.csv) to make sure it's correct. The utility metrics are shown in the right-most columns.
 
 # Fully Reproduce
 
 ### Baseline
 
-FrUITeR’s baseline techniques **Naïve** and **Perfect** are implemented in Python (112 SLOC). 
+FrUITeR’s baseline techniques **Naïve** and **Perfect** are implemented in Python.
 
 `Location:` Repo #2 `TestAnalyzer/gui_mapper/baseline/`
 
