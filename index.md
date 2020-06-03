@@ -39,6 +39,7 @@
 **Utility Evaluator:** FrUITeR's component that evaluates the *usefulness* of test cases transferred by a given technique compared to the ground-truth test cases, based on FrUITeR's 2 utility metrics: (1) effort; and (2) reduction.
 
 # Installation
+
 1. Download and install **Docker Desktop** from this link ([https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop))
 
 2. Start your docker application and open the terminal. Test that your installation works by running the hello-world Docker image using command `$ docker run hello-world`. If you see the message below, Docker is successfully installed!
@@ -54,15 +55,15 @@ Unable to find image 'hello-world:latest' locally
     ...
 ```
 
-3. That's it! You're done with all the installation and ready to go! :)
+**That's it! You're done with all the installation and ready to go! :)**
 
 # Quick Start
 
 FrUITeR has three components (shaded boxes in the workflow): (1) **Event Extractor**; (2) **Fidelity Evaluator**; and (3) **Utility Evaluator**. We will now run each of them with a simple example.
 
-## How to Run Event Extractor
+## Event Extractor
 
-Event Extractor is implemented in Java using [Soot framework](https://github.com/Sable/soot). The source code is located on Github: https://github.com/felicitia/EventExtractor. We have created a Docker image with all the dependencies. Simply follow the steps below to run Event Extractor.
+Event Extractor is implemented in Java using [Soot framework](http://sable.github.io/soot/). The source code is located on Github: https://github.com/felicitia/EventExtractor. We have created a Docker image with all the dependencies. Simply follow the steps below to run Event Extractor.
 
 **What to Expect:** Let's use the app *Wish* as an example. Event Extractor will extract the GUI event sequences from Wish's test cases written in Java to `Wish.csv`. We assume the test cases are already written. For example, Wish's test cases are located on our Github reposotiry: [Wish's test cases](https://github.com/felicitia/TestBenchmark-Jave-client/blob/master/src/main/java/Wish/RepresentativeTests.java).
 
@@ -82,7 +83,7 @@ Event Extractor is implemented in Java using [Soot framework](https://github.com
 
 4. You should see `Wish.csv` in the 'shared_volume' folder you created in step 2. You can compare yours with our example [Wish.csv](https://github.com/felicitia/EventExtractor/blob/master/example_output/Wish.csv) to make sure it's correct.
 
-## How to Run Fidelity Evaluator and Utility Evaluator
+## Fidelity Evaluator and Utility Evaluator
 
 **Fidelity Evaluator** and **Utility Evaluator** are implemented in Python using [Jupyter Notebook](https://jupyter.org/). The source code is located on Github within TestAnalyzer project: https://github.com/felicitia/TestAnalyzer. We envision Fidelity Evaluator and Utility Evaluator are two instances of TestAnalyzer's Evaluators based on the fidelity and utility metrics we defined. In the future, TestAnalyzer can be extended to include other Evaluators based on the metrics of one's interest (defined by us or other follow-up work).
 
@@ -98,7 +99,7 @@ We have created a Docker image with all the dependencies for you to launch Jupyt
 
 2. Run TestAnalyzer to launch the Jupyter Notebook server using the CMD below.
 
-    CMD: `docker run -p 8888:8888 felicitia/fruiter-testanalyzer`
+    CMD: `$ docker run -p 8888:8888 felicitia/fruiter-testanalyzer`
 
     You should see the following messages.
 ```
@@ -117,7 +118,7 @@ We have created a Docker image with all the dependencies for you to launch Jupyt
      or http://127.0.0.1:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee
 ```
 
-3. Copy the URL in the last line shown in step 2. In our example output above, it is `http://127.0.0.1:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee`. Open the URL in a broswer. You should see a similar screen as below.
+3. Copy the URL in the last line shown in step 2. In our example above, it is `http://127.0.0.1:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee`. Open the URL in a broswer. You should see a similar screen as below.
 
 <img src="figs/jupyter.png" >  
 
@@ -127,14 +128,39 @@ We have created a Docker image with all the dependencies for you to launch Jupyt
 
 5. Similar to step 4, go to `utility_evaluator_example.ipynb` and run it by clicking the 'Run' button. It will output `craftdroid_utility.csv` in the `output/` folder located in the home page. You can compare your output with our example [craftdroid_utility.csv](https://github.com/felicitia/TestAnalyzer/blob/master/output/craftdroid_utility.csv) to make sure it's correct. The utility metrics are shown in the right-most columns.
 
-# Fully Reproduce
+**Congratulations! Now you have successfully run FrUITeR's three components with simple examples. You can proceed to fully reproduce the results of the 11,917 test reuse cases from the 20 subject apps following the instructions below.**
 
-### Baseline
+# Fully Reproduce and Reuse
 
-FrUITeR’s baseline techniques **Naïve** and **Perfect** are implemented in Python.
+This section describes how to fully reproduce all the experiments (i.e., output the results of the 11,917 test reuse cases) studied in our ESEC/FSE 2020 paper. We will also explain how to reuse FrUITeR to run your own experiments.
 
-`Location:` Repo #2 `TestAnalyzer/gui_mapper/baseline/`
+## Event Extractor
 
+### Fully Reproduce Event Extractor
+The [Quick Start](#quick-start) showed how to run Event Extractor using the app *Wish* as an example. Similarly, to fully reproduce Event Extractor with all the 20 subject apps, you can follow the same steps and simply replace the parameter `Wish.RepresentativeTests` in step 3 to another app `{APP_NAME}.RepresentativeTests`, such as `Etsy.RepresentativeTests` and `abc.RepresentativeTests`.
+
+The `{APP_NAME}` of our 20 subject apps can be found in Event Extractor's repository ([link](https://github.com/felicitia/EventExtractor/tree/master/src/main/jib/classes)). The corresponding `*.apk` files of the 20 apps can be downloaded [here](https://github.com/felicitia/TestBenchmark-Java-client/tree/master/subjects).
+
+### Reuse Event Extractor
+
+If you wish to reuse FrUITeR'S Event Extractor to extract the GUI event sequences from the test cases of your own choice, follow the steps below. Note that the current implementation of FrUITeR's Event Extractor is based on [Soot framework](http://sable.github.io/soot/), which only supports Java test cases. 
+
+#### Steps:
+
+1. Clone the Event Extractor repository from Github ([link](https://github.com/felicitia/EventExtractor)).
+
+2. Obtain the `.class` files of your Java test cases. These `.class` files serve as the input to Event Extractor.
+
+If you have already written your Java test cases and compiled them, great! You will already have the `.class` files.
+
+If you wish to write new Java test cases from scratch, you can reuse our [TestBenchmark-Java-client](https://github.com/felicitia/TestBenchmark-Java-client) project by simply extending it. This is a [Maven](https://maven.apache.org/) project and the current test cases are written with [Appium framework](http://appium.io/). You can follow the same structure by adding test cases to `src/main/java/{APP_NAME}/{Test_Name}` and adding the subject app's `.apk` file to `subjects/{APP_CATEGORY}`. If your test cases are compiled successfully, the `.class` files will be generated, usually in `/target/classes/*`.
+3. Copy `.class` files to Event Extractor project you cloned in step 1, under `src/main/jib/classes/*`.
+
+**Final Remarks:** With your own `.class` files, you can run the Event Extractor on your own test cases now! Simply run the `main()` method in `src/main/java/EventExtractor` and specify the parameters (details of the parameters are explained as comments in the `EventExtractor.java`). 
+
+If you also want to build a Docker image out of your own Event Extractor like FrUITeR, follow [this instruction](https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin) to  containerize your Maven project using Jib. 
+
+## Fidelity Evaluator and Utility Evalutor
 
 
 ## Modularization of Existing Techniques
