@@ -76,7 +76,7 @@ FrUITeR has three components (shaded boxes in the workflow): (1) **Event Extract
 
 ## Event Extractor
 
-**Source Code Location:** https://github.com/felicitia/EventExtractor
+**Source Code Location:** [https://github.com/felicitia/EventExtractor](https://github.com/felicitia/EventExtractor) \[**DOI:** 10.6084/m9.figshare.12430172\]
 
 Event Extractor is implemented in Java using [Soot framework](http://sable.github.io/soot/). We have created a Docker image with all the dependencies. Simply follow the steps below to run Event Extractor.
 
@@ -102,7 +102,7 @@ Event Extractor is implemented in Java using [Soot framework](http://sable.githu
 
 ## Fidelity Evaluator and Utility Evaluator
 
-**Source Code Location:** https://github.com/felicitia/TestAnalyzer
+**Source Code Location:** [https://github.com/felicitia/TestAnalyzer](https://github.com/felicitia/TestAnalyzer) \[**DOI:** 10.6084/m9.figshare.12430178\]
 
 **Fidelity Evaluator** and **Utility Evaluator** are implemented in Python using [Jupyter Notebook](https://jupyter.org/). They belong to the **TestAnalyzer** repository. We envision Fidelity Evaluator and Utility Evaluator are two instances of TestAnalyzer's Evaluators based on the fidelity and utility metrics we defined. In the future, TestAnalyzer can be extended to include other Evaluators based on the metrics of one's interest (defined by us or other follow-up work).
 
