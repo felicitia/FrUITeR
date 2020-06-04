@@ -139,11 +139,11 @@ We have created a Docker image with all the dependencies for you to launch Jupyt
 
 3. Copy the URL in the last line shown in step 2. In our example above, it is `http://127.0.0.1:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee`. Open the URL in a browser. You should see a similar screen as below. (Make sure you don't have other Jupyter Notebook servers running already. You can use `jupyter notebook list` command as a sanity check.)
 
-<img src="figs/jupyter.png" >  
+    <img src="figs/jupyter.png" >  
 
 4. Go to `fidelity_evaluator_example.ipynb` and run it by clicking the 'Run' button as shown below. It will output `craftdroid_fidelity.csv` in the `output/` folder located in the home page (as indicated in the screenshot above). The output files can be downloaded to your local machine (download option is under the 'File' menu). You can compare your output with our example [craftdroid_fidelity.csv](https://github.com/felicitia/TestAnalyzer/blob/master/output/craftdroid_fidelity.csv) to check the correctness. 
 
-<img src="figs/jupyter_run.png" >  
+    <img src="figs/jupyter_run.png" >  
 
 5. Similar to step 4, go to `utility_evaluator_example.ipynb` and run it by clicking the 'Run' button. It will output `craftdroid_utility.csv` in the `output/` folder located in the home page. You can compare your output with our example [craftdroid_utility.csv](https://github.com/felicitia/TestAnalyzer/blob/master/output/craftdroid_utility.csv) to check the correctness.
 
