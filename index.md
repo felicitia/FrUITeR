@@ -1,5 +1,6 @@
 # Table of Content
 <!--ts-->
+   * [Table of Content](#table-of-content)
    * [FrUITeR's Introduction](#fruiters-introduction)
    * [Installation](#installation)
    * [Quick Start](#quick-start)
@@ -12,13 +13,16 @@
          * [Fully Reproduce Event Extractor](#fully-reproduce-event-extractor)
          * [Reuse Event Extractor](#reuse-event-extractor)
             * [Steps](#steps-2)
-      * [Fidelity Evaluator and Utility Evalutor](#fidelity-evaluator-and-utility-evalutor)
-         * [Fully Reproduce Fidelity Evaluator and Utility Evalutor](#fully-reproduce-fidelity-evaluator-and-utility-evalutor)
+      * [Fidelity Evaluator and Utility Evaluator](#fidelity-evaluator-and-utility-evaluator-1)
+         * [Fully Reproduce Fidelity Evaluator and Utility Evaluator](#fully-reproduce-fidelity-evaluator-and-utility-evaluator)
             * [Steps](#steps-3)
-         * [Reuse Fidelity Evaluator and Utility Evalutor](#reuse-fidelity-evaluator-and-utility-evalutor)
+         * [Reuse Fidelity Evaluator and Utility Evaluator](#reuse-fidelity-evaluator-and-utility-evaluator)
             * [Steps](#steps-4)
    * [FrUITeR's Final Datasets](#fruiters-final-datasets)
       * [Header Description](#header-description)
+
+<!-- Added by: yixue, at: Thu Jun  4 18:44:16 CDT 2020 -->
+
 <!--te-->
 <!-- run ./gh-md-toc --insert index.md to generate ToC automatically -->
 
@@ -92,13 +96,13 @@ Event Extractor is implemented in Java using [Soot framework](http://sable.githu
 
     **CMD**: `$ mkdir shared_volume`
 
-3. Run Event Extractor to convert Wish's test cases into `Wish.csv` using the **CMD** below. `{absolute path}` is the absolute path to the directory that contains the 'shared_volume' folder you just created in step 2. If you want to know more about the parameters, check out this [reference](https://thenewstack.io/docker-basics-how-to-share-data-between-a-docker-container-and-host/).
+3. Run Event Extractor to convert Wish's test cases into `Wish.csv` using the **CMD** below. You only need to replace `{absolute path}`, which is the full absolute path to the directory that contains the 'shared_volume' folder you just created in step 2. You can simply use `$pwd` command to get the full absolute path of the current directory. If you want to know more about the parameters, check out this [reference](https://thenewstack.io/docker-basics-how-to-share-data-between-a-docker-container-and-host/).
 
     **CMD**: `$ docker run -dit -P -v {absolute path}/shared_volume:/output/ felicitia/fruiter-eventextractor Wish.RepresentativeTests classes/ /output/`
 
 4. You should see `Wish.csv` in the 'shared_volume' folder you created in step 2. You can compare yours with our example [Wish.csv](https://github.com/felicitia/EventExtractor/blob/master/example_output/Wish.csv) to check the correctness.
 
-**If your `Wish.csv` looks the same as ours, congratulation! You have successfully run FrUITeR's Event Extractor!**
+**If your `Wish.csv` looks the same as ours, congratulations! You have successfully run FrUITeR's Event Extractor!**
 
 ## Fidelity Evaluator and Utility Evaluator
 
@@ -137,7 +141,7 @@ We have created a Docker image with all the dependencies for you to launch Jupyt
      or http://127.0.0.1:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee
 ```
 
-3. Copy the URL in the last line shown in step 2. In our example above, it is `http://127.0.0.1:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee`. Open the URL in a browser. You should see a similar screen as below. (Make sure you don't have other Jupyter Notebook servers running already. You can use `jupyter notebook list` command as a sanity check.)
+3. Copy the URL in the last line shown in step 2. In our example above, it is `http://127.0.0.1:8888/?token=51aa6c478ed99cedcc04a22262c56d89952f4345bfd6f6ee`. Open the URL in a browser. You should see a similar screen as below. (Make sure you don't have other Jupyter Notebook servers running already. You can use `$ jupyter notebook list` command as a sanity check.)
 
     <img src="figs/jupyter.png" >  
 
@@ -147,7 +151,7 @@ We have created a Docker image with all the dependencies for you to launch Jupyt
 
 5. Similar to step 4, go to `utility_evaluator_example.ipynb` and run it by clicking the 'Run' button. It will output `craftdroid_utility.csv` in the `output/` folder located in the home page. You can compare your output with our example [craftdroid_utility.csv](https://github.com/felicitia/TestAnalyzer/blob/master/output/craftdroid_utility.csv) to check the correctness.
 
-**If your `craftdroid_utility.csv` and `craftdroid_utility.csv` look the same as ours, congratulations! You have successfully run FrUITeR's Fidelity Evaluator and Utility Evaluator! You can now proceed to fully reproduce the results of the all the test reuse cases from the 20 subject apps following the instructions below.**
+**If your `craftdroid_fidelity.csv` and `craftdroid_utility.csv` look the same as ours, congratulations! You have successfully run FrUITeR's Fidelity Evaluator and Utility Evaluator! You can now proceed to fully reproduce the results of all the test reuse cases from the 20 subject apps following the instructions below.**
 
 # Fully Reproduce and Reuse
 
@@ -158,30 +162,30 @@ This section describes how to fully reproduce all the experiments (i.e., output 
 ### Fully Reproduce Event Extractor
 The [Quick Start](#event-extractor) showed how to run Event Extractor using the app *Wish* as an example. Similarly, to fully reproduce Event Extractor with all the 20 subject apps, you can follow the same steps and simply replace the parameter `Wish.RepresentativeTests` in step 3 to another app `{APP_NAME}.RepresentativeTests`, such as `Etsy.RepresentativeTests` and `abc.RepresentativeTests`.
 
-The `{APP_NAME}` of our 20 subject apps can be found in Event Extractor's repository ([link](https://github.com/felicitia/EventExtractor/tree/master/src/main/jib/classes)). The corresponding `*.apk` files of the 20 apps can be downloaded [here](https://github.com/felicitia/TestBenchmark-Java-client/tree/master/subjects).
+The `{APP_NAME}` of our 20 subject apps can be found in Event Extractor's repository \[[Link](https://github.com/felicitia/EventExtractor/tree/master/src/main/jib/classes)\]. The corresponding `*.apk` files of the 20 apps can be downloaded [here](https://github.com/felicitia/TestBenchmark-Java-client/tree/master/subjects).
 
 ### Reuse Event Extractor
 
-If you wish to reuse FrUITeR'S Event Extractor to extract the GUI event sequences from the test cases of your own choice, follow the steps below. Note that the current implementation of FrUITeR's Event Extractor is based on [Soot framework](http://sable.github.io/soot/), which only supports Java test cases. 
+If you wish to reuse FrUITeR'S Event Extractor to extract the GUI event sequences from the test cases of your own choice, follow the steps below. Note that the current implementation of the Event Extractor is based on [Soot framework](http://sable.github.io/soot/), which only supports Java test cases. 
 
 #### Steps
 
-1. Clone the Event Extractor repository from Github ([link](https://github.com/felicitia/EventExtractor)).
+1. Clone the Event Extractor repository from Github \[[Link](https://github.com/felicitia/EventExtractor)\].
 
 2. Obtain the `.class` files of your Java test cases. These `.class` files serve as the input to Event Extractor.
 
     If you have already written your Java test cases and compiled them, great! You will already have the `.class` files.
 
-    If you wish to write new Java test cases from scratch, you can reuse our [TestBenchmark-Java-client](https://github.com/felicitia/TestBenchmark-Java-client) project by simply extending it. This is a [Maven](https://maven.apache.org/) project and the current test cases are written with [Appium framework](http://appium.io/). You can follow the same structure by adding test cases to `src/main/java/{APP_NAME}/{Test_Name}` and adding the subject app's `.apk` file to `subjects/{APP_CATEGORY}`. If your test cases are compiled successfully, the `.class` files will be generated, usually in `/target/classes/*`.
+    If you wish to write new Java test cases from scratch, you can reuse our [TestBenchmark-Java-client](https://github.com/felicitia/TestBenchmark-Java-client) project by simply extending it. This is a [Maven](https://maven.apache.org/) project and the current test cases are written with [Appium framework](http://appium.io/). You can follow the same structure by adding test cases to `src/main/java/{APP_NAME}/{TEST_NAME}` and adding the subject app's `.apk` file to `subjects/{APP_CATEGORY}`. If your test cases are compiled successfully, the `.class` files will be generated, usually in `/target/classes/*`.
 
 3. Copy `.class` files to Event Extractor project you cloned in step 1, under `src/main/jib/classes/*`.
 
 **Final Remarks:** With your own `.class` files, you can run the Event Extractor on your own test cases now! Simply run the `main()` method in `src/main/java/EventExtractor` and specify the parameters (details of the parameters are explained as comments in the `EventExtractor.java`). If you also want to build a Docker image out of your own Event Extractor like FrUITeR, follow [this instruction](https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin) to  containerize your Maven project using Jib. 
 
 
-## Fidelity Evaluator and Utility Evalutor
+## Fidelity Evaluator and Utility Evaluator
 
-### Fully Reproduce Fidelity Evaluator and Utility Evalutor
+### Fully Reproduce Fidelity Evaluator and Utility Evaluator
 
 **Friendly Reminder:** The experiments are executed *in batch* to produce the final results of all the test reuse cases (both fidelity and utility), based on the `.csv` files of the 20 apps produced after [fully reproducing the Event Extractor](#fully-reproduce-event-extractor). This batch process will take some time. The runtime may vary depending on the configuration of your local machine. In our experiment, each experiment took less than an hour. Our configuration is the following.
 ```
@@ -200,60 +204,63 @@ Memory: 16 GB 2133 MHz LPDDR3
 
 3. Run the second cell to output intermediate results for the 10 **news apps**. This step takes time.
 
-**Expected Output:**
-```
-Done 1/6 processing steps...
-Done 2/6 processing steps...
-Done 3/6 processing steps...
-Done 4/6 processing steps...
-Done 5/6 processing steps...
-Done 6/6 processing steps! :) Now writing intermediate results to framework_results_news.csv...
-All done! :D
-```
+    **Expected Output:**
+
+    ```
+    Done 1/6 processing steps...
+    Done 2/6 processing steps...
+    Done 3/6 processing steps...
+    Done 4/6 processing steps...
+    Done 5/6 processing steps...
+    Done 6/6 processing steps! :) Now writing intermediate results to framework_results_news.csv...
+    All done! :D
+    ```
 
 4. Run the third cell to output intermediate results for the 10 **shopping apps**. This step takes time.
 
-**Expected Output:**
-```
-Done 1/6 processing steps...
-Done 2/6 processing steps...
-Done 3/6 processing steps...
-Done 4/6 processing steps...
-Done 5/6 processing steps...
-Done 6/6 processing steps! :) Now writing intermediate results to framework_results_shopping.csv...
-All done! :D
-```
+    **Expected Output:**
+
+    ```
+    Done 1/6 processing steps...
+    Done 2/6 processing steps...
+    Done 3/6 processing steps...
+    Done 4/6 processing steps...
+    Done 5/6 processing steps...
+    Done 6/6 processing steps! :) Now writing intermediate results to framework_results_shopping.csv...
+    All done! :D
+    ```
 
 5. Run the last cell to output final results. This step takes time. After you're done, you can find the final results in `/output/news_final.csv` and `/output/shopping_final.csv`. You can compare yours with  [ours](https://github.com/felicitia/TestAnalyzer/tree/master/output) to check the correctness.
 
-**Expected Output:**
-```
-Done 1/5 processing steps...
-Done 2/5 processing steps...
-Done 3/5 processing steps...
-Done 4/5 processing steps... Now writing news_final.csv to output folder
-Done 5/5 processing steps! :) Now writing shopping_final.csv to output folder
-All done! :D
-```
+    **Expected Output:**
 
-### Reuse Fidelity Evaluator and Utility Evalutor
+    ```
+    Done 1/5 processing steps...
+    Done 2/5 processing steps...
+    Done 3/5 processing steps...
+    Done 4/5 processing steps... Now writing news_final.csv to output folder
+    Done 5/5 processing steps! :) Now writing shopping_final.csv to output folder
+    All done! :D
+    ```
 
-If you wish to reuse FrUITeR's Fidelity Evaluator and Utility Evalutor to analyze the test reuse cases of your own choice, or add your own Evaluator to calculate other metrics of interest, follow the steps below. 
+### Reuse Fidelity Evaluator and Utility Evaluator
+
+If you wish to reuse FrUITeR's Fidelity Evaluator and Utility Evaluator to analyze the test reuse cases of your own choice, or add your own Evaluator to calculate other metrics of interest, follow the steps below. 
 
 #### Steps
 
-1. Clone the TestAnalyzer repository (contains both Fidelity Evaluator and Utility Evalutor) from Github ([link](https://github.com/felicitia/TestAnalyzer)).
+1. Clone the TestAnalyzer repository (contains both Fidelity Evaluator and Utility Evaluator) from Github \[[Link](https://github.com/felicitia/TestAnalyzer)\].
 
-2. Replace the `/input` folder with your own *GUI Maps* (GUI Map's definition is in Section 4.2). Optionally, you can reuse/modify/extend the *ground-truths* specified in `/gui_mapper/ground_truth_mapping` folder to obtain the results based on your own ground truths.
+2. Replace the `/input` folder with your own *GUI Maps* (GUI Map's definition is in Section 4.2 in the paper). Optionally, you can reuse/modify/extend the *ground-truths* specified in `/gui_mapper/ground_truth_mapping` folder to obtain the results based on your own ground truths.
 
-3. If your *GUI Maps* and *ground truths* follow the same format as ours, you can run the Fidelity Evaluator and Utility Evalutor in the same way (as you already did :)) to get the final results. Otherwise, modify our Fidelity Evaluator and Utility Evalutor or add your own Evaluators to evaluate other interesting metrics of your own choice!
+3. If your *GUI Maps* and *ground truths* follow the same format as ours, you can run the Fidelity Evaluator and Utility Evaluator in the same way (as you already did :)) to get the final results. Otherwise, modify our Fidelity Evaluator and Utility Evaluator or add your own Evaluators to evaluate other interesting metrics of your own choice!
 
 **Final Remarks:** If you also want to build a Docker image out of your own Evaluators like FrUITeR, follow [this instruction](https://u.group/thinking/how-to-put-jupyter-notebooks-in-a-dockerfile/) to containerize your own Jupyter Notebook project. 
 
 
 # FrUITeR's Final Datasets
 
-Download `Datasets.zip` from here ([link](https://figshare.com/articles/Datasets/12425246)).
+Download `Datasets.zip` from here \[[Link](https://figshare.com/articles/Datasets/12425246)\].
 
 FrUITeR's final datasets (described in Section 5.3.2) are stored as `final_dataset.RData`. The R scripts used to analyze the final datasets are located in `/scripts`.
 
