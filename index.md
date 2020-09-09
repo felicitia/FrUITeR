@@ -300,3 +300,16 @@ The meaning of the headers in the final datasets are explained in the table belo
 |      `accuracy`      | FrUITeR's fidelity metric: the value of the *accuracy*                                      |
 |      `distance`      | FrUITeR's utility metric: *effort* needed to correct the transferred test                   |
 |      `reduction`     | FrUITeR's utility metric: manual effort *reduction* compared to writing the test from scratch |
+
+## Results
+
+Our paper describes FrUITeR's 7 fedility metrics and 2 utility metrics. Due to space limitations, we show the results of three fidelity metrics and 2 utility metrics in the paper. The rest of the results can be found below.
+
+<img src="figs/Correct.png">
+
+<img src="figs/Incorrect.png" >
+
+<img src="figs/Missed.png">
+
+<img src="figs/NonExist.png" >
+
