@@ -325,7 +325,7 @@ As explained in the paper, certain information needs to be provided to enable Fr
 2. the Transferred Tests and GUI Maps, which are produced as outputs of a given test-reuse technique
 3. the manually constructed ground truths, namely, Canonical Maps and Ground-Truth Tests
 
-Since existing test-reuse techniques were not designed with FrUITeR’s workflow in mind, we had to modify existing techniques to obtain such information. This step will not be necessary for new techniques if following our guidance. This section describes the steps needed to use FrUITeR’s to evaluate a new test-reuse technique. Let’s get started! :)
+Since existing test-reuse techniques were proposed before FrUITeR and were not designed with FrUITeR’s workflow in mind, we had to modify existing techniques to obtain such information. This step will not be necessary for new techniques if following our guidance. This section describes the steps needed to use FrUITeR’s to evaluate a new test-reuse technique. Let’s get started! :)
 
 ## Prerequisite
 
