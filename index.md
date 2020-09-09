@@ -23,10 +23,9 @@
       * [Results](#results)
    * [Guidance for New Techniques](#guidance-for-new-techniques)
       * [Prerequisite](#prerequisite)
-      * [Tutorial](#tutorial)
-            * [Steps](#steps-5)
+      * [Steps](#steps-5)
 
-<!-- Added by: yixue, at: Wed Sep  9 16:35:49 CDT 2020 -->
+<!-- Added by: yixue, at: Wed Sep  9 16:41:38 CDT 2020 -->
 
 <!--te-->
 <!-- run ./gh-md-toc --insert index.md to generate ToC automatically -->
@@ -308,7 +307,7 @@ The meaning of the headers in the final datasets are explained in the table belo
 
 ## Results
 
-Our paper describes FrUITeR's 7 fedility metrics and 2 utility metrics. Due to space limitations, we show the results of three fidelity metrics and 2 utility metrics in the paper. The rest of the results can be found below.
+Our paper describes FrUITeR's 7 fidelity metrics and 2 utility metrics. Due to space limitations, we show the results of 3 fidelity metrics and 2 utility metrics in the paper. The rest of the results can be found below.
 
 <img src="figs/Correct.png">
 
@@ -332,11 +331,9 @@ Since existing test-reuse techniques were not designed with FrUITeR’s workflow
 
 We assume you have already followed our [Installation](#installation) and [Quick Start](#quick-start). If not, please follow those steps first to get your Docker environment ready!
 
-## Tutorial
+## Steps
 
 You’ll need to provide several artifacts produced by your new fancy technique, following the format that FrUITeR supports. Then you can run FrUITeR as you did in the [Quick Start](#quick-start) to get the fidelity and utility results of your technique automatically! The specific steps are provided below.
-
-#### Steps
 
 1. Extract the GUI events from your Source Tests. The extracted events should follow the format below as a `.csv` file. If your tests are written in Java using Appium, you can reuse FrUITeR’s [Event Extractor](#event-extractor). 
 
