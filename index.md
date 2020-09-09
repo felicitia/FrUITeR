@@ -307,7 +307,7 @@ The meaning of the headers in the final datasets are explained in the table belo
 
 ## Results
 
-Our paper describes FrUITeR's 7 fidelity metrics and 2 utility metrics. Due to space limitations, we show the results of 3 fidelity metrics and 2 utility metrics in the paper. The rest of the results can be found below.
+Our paper describes the definitions of FrUITeR's 7 fidelity metrics and 2 utility metrics. Due to space limitations, we show the results of 3 fidelity metrics and 2 utility metrics in the paper. The rest of the results can be found below.
 
 <img src="figs/Correct.png">
 
@@ -341,28 +341,32 @@ You’ll need to provide several artifacts produced by your new fancy technique,
    | :----------------------------------------- | ------------------------------ |
    | <App1.ClassName_of_Tests: void testName()> | [ {GUI_Event1}, {GUI_Event2} ] |
 
-   **event_array** column contains a JSON array of **GUI Events** that belong to a certain test specified in the **method** column. Each **GUI Event** is a JSON object with the following keys. 
+   **event_array** column contains a JSON array of **GUI Events** that belong to a certain test specified in the **method** column. Each **GUI Event** is a JSON object with the following fields. 
 
    ```
    {
      "input": "XXX", //the input value associated with the event (if any)
      "id_or_xpath": "XXX", //the resource id (starting with "id@") or xpath (starting with "xpath@")
-     "action": "XXX" //the action of the event. currently support "sendKeys" and "click"
+     "action": "XXX" //the action of the event, e.g., "sendKeys", "click"
    }
    ```
 
    **Example:**  Source Tests of Etsy can be found [here](https://github.com/felicitia/TestBenchmark-Java-client/blob/master/src/main/java/Etsy/RepresentativeTests.java). In this case, your extracted GUI events will look like this file [etsy.csv](https://github.com/felicitia/TestAnalyzer/blob/master/input/extracted_tests/shopping/etsy.csv).
 
-2. Generate the mapping results (i.e., Transferred Tests) following FrUITeR’s format (same format as the `.csv` file from step 1). But note that **event_array** contains the GUI events of the **Transferred** Tests, while in step 1 it contains the GUI events of the **Source** Tests. Optionally, if you want to separate the results of oracle events from the regular events, you can generate the mapping results of the oracle events following the same workflow to obtain their fidelity and utility results separately. Alternatively, you can include additional fields to the GUI Event object to capture the event type (e.g., oracle events) and extend FrUITeR's Fidelity Evaluator and Utility Evaluator to separate the results of different types of events.
+2. Use your technique to generate the mapping results (i.e., Transferred Tests produced by your technique) following FrUITeR’s format (same format as the `.csv` file from step 1). But note that **event_array** contains the GUI events of the **Transferred** Tests, while in step 1 it contains the GUI events of the **Source** Tests. 
 
-   **Example:** The mapping results of transferring Etsy’s *sign-in* and *sign-up* tests to Wish’s may look like this file [etsy_wish.csv](https://github.com/felicitia/TestAnalyzer/blob/master/input/craftdroid/mapping_results/etsy_wish.csv). Note that we added a filed “score” to the GUI Event object that captures the raw similarity score. You can add a field “event_type” to capture oracle events or other fileds of interest as mentioned above.
+   Optionally, if you want to separate the results of oracle events from the regular events, you can generate the mapping results of the oracle events following the same workflow to obtain their fidelity and utility results separately. Alternatively, you can include additional fields to the GUI Event object to capture the event type (e.g., oracle events) and extend FrUITeR's Fidelity Evaluator and Utility Evaluator to separate the results of different types of events.
+
+   **Example:** The mapping results of transferring Etsy’s *sign-in* and *sign-up* tests to Wish’s may look like this file [etsy_wish.csv](https://github.com/felicitia/TestAnalyzer/blob/master/input/craftdroid/mapping_results/etsy_wish.csv). Note that we added a filed “score” to the GUI Event object that captures the raw similarity score. You can add a field “event_type” to capture oracle events as mentioned above, or other fileds of interest.
 
 3. Manually construct Canonical Maps for each of your subject app. You can reuse, modify, or extend [FrUITeR’s Canonical Maps](https://github.com/felicitia/TestAnalyzer/tree/master/input/ground_truth_mapping) if using the same subject apps. 
 
    **Example:** Etsy’s Canonical Map may look like this file [GT_etsy.csv](https://github.com/felicitia/TestAnalyzer/blob/master/input/ground_truth_mapping/shopping/GT_etsy.csv). The required fields are (1) at least one of **id** and **xpath** fields has to be specified; (2) **canonical** that shows the Canonical Event that the app-specific event maps to; (3) only if you are using our Naive baseline, **current Activity** and **next Activity** need to be specified. If the next Activity is the same as the current Activity, you can leave it empty.
 
-4. Extract the UI layout dumps, i.e., `.uix` files in XML format dumped by [Android’s UIAutomator](https://developer.android.com/training/testing/ui-automator). This is used to identify the same  event if it’s specified in different ways (i.e., either id or xpath). For example, if an event `Event1` in the Transfered test uses “xpath” but the Canonical Map uses “id” to specify `Event1`, we will not be able to find the Canonical event of  `Event1` directly. In this case, FrUITeR analyzes the UI layout dumps (i.e., the `.uix` files) to identify the XML element of `Event1` based on its xpath. With the information in that XML element, FrUITeR will be able to find the “id” (i.e., specified in `resource-id` field) of `Event1` and will be able to find its Canonical Event accordingly based on that “id”.
+4. Extract the GUI events from your Ground-Truth Tests. This is essentially the same step as step 1 and you can reuse step 1’s artifacts. For example, the extracted GUI events of Etsy will be Source Events if Etsy is the source app, and will be the Ground-Truth Events is Etsy is the target app. 
 
-   **Example:** Some examples of Etsy’s UI layout dumps can be found in [this folder](https://github.com/felicitia/TestAnalyzer/tree/master/input/screenshots/shopping/etsy). The screenshot `.png` files are not necessary, but just to give an intuitive understanding of what each UI layout dump is.
+5. Extract the UI layout dumps, i.e., `.uix` files in XML format dumped by [Android’s UIAutomator](https://developer.android.com/training/testing/ui-automator). This is used to identify the same  event if it’s specified in different ways (i.e., either id or xpath). For example, if an event `Event1` in the Transfered Test uses `xpath` but the Canonical Map uses `id`  to specify `Event1`, we will not be able to find the Canonical Event of  `Event1` directly. In this case, FrUITeR analyzes the UI layout dumps (i.e., the `.uix` files) to identify the XML element of `Event1` based on its xpath. With the information in the identified XML element, FrUITeR will be able to find the `id`  (specified in `resource-id` field) of `Event1` and will be able to find its Canonical Event accordingly based on that `id`.
 
-5. Congratulations! Now you have prepared all the needed inputs for FrUITeR. We assume you have already run FrUITeR successfully following the [Quick Start](#quick-start). Now you can just replace FrUITeR’s default inputs to yours and rerun FrUITeR to get the results of your new shiny technique. I hope your new technique outperforms the state-of-the-art! ;)
+   **Example:** Some examples of Etsy’s UI layout dumps can be found in [this folder](https://github.com/felicitia/TestAnalyzer/tree/master/input/screenshots/shopping/etsy). The screenshot `.png` files are not necessary, but just to give an intuitive understanding of what each UI layout dump is. 
+
+   Congratulations! 👏 Now you have prepared all the needed inputs for FrUITeR. We assume you have already run FrUITeR successfully following the [Quick Start](#quick-start). Now you can just replace FrUITeR’s default inputs with yours and rerun FrUITeR to get the results of your new shiny technique. Hope your new technique outperforms the state-of-the-art! 😉
