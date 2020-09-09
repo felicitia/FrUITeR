@@ -21,8 +21,12 @@
    * [FrUITeR's Final Datasets](#fruiters-final-datasets)
       * [Header Description](#header-description)
       * [Results](#results)
+   * [Guidance for New Techniques](#guidance-for-new-techniques)
+      * [Prerequisite](#prerequisite)
+      * [Tutorial](#tutorial)
+            * [Steps](#steps-5)
 
-<!-- Added by: yixue, at: Thu Jun  4 18:44:16 CDT 2020 -->
+<!-- Added by: yixue, at: Wed Sep  9 16:35:49 CDT 2020 -->
 
 <!--te-->
 <!-- run ./gh-md-toc --insert index.md to generate ToC automatically -->
