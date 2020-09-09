@@ -307,7 +307,7 @@ The meaning of the headers in the final datasets are explained in the table belo
 
 ## Results
 
-Our paper describes the definitions of FrUITeR's 7 fidelity metrics and 2 utility metrics. Due to space limitations, we show the results of 3 fidelity metrics and 2 utility metrics in the paper. The rest of the results can be found below.
+Our paper describes FrUITeR's 7 fidelity metrics and 2 utility metrics. Due to space limitations, we show the results of 3 fidelity metrics and 2 utility metrics in the paper. The rest of the results can be found below.
 
 <img src="figs/Correct.png">
 
