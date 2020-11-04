@@ -5,7 +5,6 @@
 
 # Table of Content
 <!--ts-->
-   * [Table of Content](#table-of-content)
    * [FrUITeR's Introduction](#fruiters-introduction)
    * [Installation](#installation)
    * [Quick Start](#quick-start)
