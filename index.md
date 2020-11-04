@@ -1,3 +1,8 @@
+- [FrUITeR's paper](https://arxiv.org/abs/2008.03427)
+- [FrUITeR's trailer video](https://youtu.be/zu2pmpqO9Rk)
+- [FrUITeR's long video](https://youtu.be/zVWpT5aLyQo)
+- [FrUITeR's Reddit post](https://www.reddit.com/r/ESECFSE/comments/jn3hng/fruiter_a_framework_for_evaluating_ui_test_reuse/) (feel free to comment! :))
+
 # Table of Content
 <!--ts-->
    * [Table of Content](#table-of-content)
